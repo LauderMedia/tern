@@ -12,6 +12,7 @@ require (
 	github.com/jackc/pgconn v1.6.1
 	github.com/jackc/pgerrcode v0.0.0-20190803225404-afa3381909a6
 	github.com/jackc/pgx/v4 v4.7.1
+	github.com/joho/godotenv v1.3.0
 	github.com/mitchellh/copystructure v1.0.0 // indirect
 	github.com/spf13/cobra v1.0.0
 	github.com/stretchr/testify v1.6.1

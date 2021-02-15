@@ -19,6 +19,7 @@ import (
 	"github.com/Masterminds/sprig"
 	"github.com/jackc/pgx/v4"
 	"github.com/jackc/tern/migrate"
+	"github.com/joho/godotenv"
 	"github.com/spf13/cobra"
 	ini "github.com/vaughan0/go-ini"
 )
@@ -169,6 +170,7 @@ func (c *Config) Connect(ctx context.Context) (*pgx.Conn, error) {
 }
 
 func main() {
+	godotenv.Load()
 	cmdInit := &cobra.Command{
 		Use:   "init DIRECTORY",
 		Short: "Initialize a new tern project",
@@ -252,7 +254,7 @@ The word "last":
 		Long:  "Generate a new migration with the next sequence number and provided name",
 		Run:   NewMigration,
 	}
-	cmdNew.Flags().StringVarP(&cliOptions.migrationsPath, "migrations", "m", ".", "migrations path")
+	cmdNew.Flags().StringVarP(&cliOptions.migrationsPath, "migrations", "m", "sql/migrations", "migrations path")
 
 	cmdVersion := &cobra.Command{
 		Use:   "version",
@@ -663,7 +665,8 @@ func Status(cmd *cobra.Command, args []string) {
 
 func LoadConfig() (*Config, error) {
 	config := &Config{VersionTable: "public.schema_version"}
-	if connConfig, err := pgx.ParseConfig(""); err == nil {
+
+	if connConfig, err := pgx.ParseConfig(os.Getenv("DB_URL")); err == nil {
 		config.ConnConfig = *connConfig
 	} else {
 		return nil, err
