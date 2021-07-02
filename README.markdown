@@ -280,7 +280,7 @@ your PostgreSQL server is `pg.example.com`, but you only have SSH access, then
 your SSH host would be pg.example.com and your database host would be
 `localhost`.
 
-Tern will automatically use an SSH agent if available.
+Tern will automatically use an SSH agent or `~/.ssh/id_rsa` if available.
 
 ## Embedding Tern
 
@@ -308,6 +308,14 @@ Gem are incompatible with the version 1 release. However, that version of tern
 is still available through RubyGems and the source code is on the ruby branch.
 
 ## Version History
+
+## 1.12.5 (June 12, 2021)
+
+* Look for SSH keys in `~/.ssh/id_rsa` (Miles Delahunty)
+
+## 1.12.4 (February 27, 2021)
+
+* Use user's known_hosts file when connecting via SSH
 
 ## 1.12.3 (December 24, 2020)
 
